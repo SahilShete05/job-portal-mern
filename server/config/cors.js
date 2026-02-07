@@ -11,7 +11,15 @@ const getCorsOrigins = () => {
     return [];
   }
 
-  return ['http://localhost:3000', 'http://localhost:5173', 'http://localhost:5174'];
+  const devOrigins = process.env.CORS_ORIGIN_DEV || '';
+  if (!devOrigins) {
+    return [];
+  }
+
+  return devOrigins
+    .split(',')
+    .map((origin) => origin.trim())
+    .filter(Boolean);
 };
 
 const isOriginAllowed = (origin) => {

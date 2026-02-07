@@ -125,8 +125,8 @@ const ResumeUploader = ({ currentResume, onUploadSuccess, onError }) => {
     if (resumePath.startsWith('http')) {
       return resumePath;
     }
-    const apiBase = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
-    const apiOrigin = apiBase.replace(/\/api\/?$/, '');
+    const apiBase = `${import.meta.env.VITE_API_BASE_URL}`;
+    const apiOrigin = apiBase.replace(/\/api\/?$/, '') || window.location.origin;
     return `${apiOrigin}/${resumePath.replace(/^\//, '')}`;
   };
 

@@ -27,7 +27,10 @@ export const connectSocket = () => {
 
   currentToken = token;
 
-  socket = io(import.meta.env.VITE_API_BASE_URL?.replace('/api', '') || 'http://localhost:5000', {
+  const envBaseUrl = `${import.meta.env.VITE_API_BASE_URL}`;
+  const socketOrigin = envBaseUrl ? envBaseUrl.replace(/\/api\/?$/, '') : window.location.origin;
+
+  socket = io(`${socketOrigin}`, {
     auth: { token },
     transports: ['websocket'],
     reconnection: true,

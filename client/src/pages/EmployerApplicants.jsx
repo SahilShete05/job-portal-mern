@@ -41,11 +41,11 @@ const EmployerApplicants = () => {
   }, [jobId]);
 
   const apiOrigin = useMemo(() => {
-    const baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
+    const baseUrl = `${import.meta.env.VITE_API_BASE_URL}`;
     try {
       return new URL(baseUrl).origin;
     } catch (error) {
-      return 'http://localhost:5000';
+      return window.location.origin;
     }
   }, []);
 
