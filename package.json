@@ -1,0 +1,13 @@
+{
+  "name": "project-2",
+  "version": "1.0.0",
+  "description": "Fullstack Job Portal",
+  "scripts": {
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd server && npm run dev",
+    "client": "cd client && npm run dev"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}

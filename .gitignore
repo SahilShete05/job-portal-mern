@@ -1,0 +1,26 @@
+# Environment variables (root + all subfolders)
+.env
+.env.*
+server/.env
+client/.env
+
+# Node
+node_modules/
+
+# Builds
+dist/
+build/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Local scripts & test artifacts
+*.ps1
+*.bat
+test-*.json
+
