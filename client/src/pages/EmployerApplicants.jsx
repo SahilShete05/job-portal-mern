@@ -78,17 +78,12 @@ const EmployerApplicants = () => {
     }
   }, []);
 
-  const handleViewResume = useCallback(async (applicationId, resumePath, resumeUrl) => {
-    if (!resumePath || !resumeUrl) {
+  const handleViewResume = useCallback(async (applicationId, resumePath) => {
+    if (!resumePath) {
       return;
     }
 
     const lowerPath = resumePath.toLowerCase();
-    if (!lowerPath.endsWith('.pdf')) {
-      const viewerUrl = `https://docs.google.com/gview?embedded=1&url=${encodeURIComponent(resumeUrl)}`;
-      window.open(viewerUrl, '_blank', 'noopener,noreferrer');
-      return;
-    }
 
     try {
       if (!getToken()) {
@@ -112,10 +107,20 @@ const EmployerApplicants = () => {
         }
       }
 
-      const contentType = response.headers['content-type'] || 'application/pdf';
+      const contentType = response.headers['content-type'] || 'application/octet-stream';
       const blob = new Blob([response.data], { type: contentType });
       const blobUrl = window.URL.createObjectURL(blob);
-      window.open(blobUrl, '_blank', 'noopener,noreferrer');
+      if (lowerPath.endsWith('.pdf')) {
+        window.open(blobUrl, '_blank', 'noopener,noreferrer');
+      } else {
+        const fileName = resumePath.split('/').pop() || 'resume';
+        const link = document.createElement('a');
+        link.href = blobUrl;
+        link.download = fileName;
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+      }
       setTimeout(() => window.URL.revokeObjectURL(blobUrl), 10000);
     } catch (err) {
       setFeedback({
@@ -199,11 +204,7 @@ const EmployerApplicants = () => {
                     const resumeUrl = resumePath
                       ? (resumePath.startsWith('http') ? resumePath : `${apiOrigin}/${resumePath}`)
                       : null;
-                    const viewerUrl = resumeUrl
-                      ? (resumePath.toLowerCase().endsWith('.pdf')
-                        ? resumeUrl
-                        : `https://docs.google.com/gview?embedded=1&url=${encodeURIComponent(resumeUrl)}`)
-                      : null;
+                    const isPdfResume = resumePath?.toLowerCase().endsWith('.pdf');
                     const displayStatus = application.status || 'applied';
 
                     return (
@@ -218,13 +219,13 @@ const EmployerApplicants = () => {
                           {application.applicant?.email || '—'}
                         </td>
                         <td className="px-3 py-3 sm:px-6 sm:py-4 text-xs sm:text-sm">
-                          {viewerUrl ? (
+                          {resumeUrl ? (
                             <button
                               type="button"
-                              onClick={() => handleViewResume(application._id, resumePath, resumeUrl)}
+                              onClick={() => handleViewResume(application._id, resumePath)}
                               className="text-[color:var(--app-accent)] hover:underline"
                             >
-                              View Resume
+                              {isPdfResume ? 'View Resume' : 'Download Resume'}
                             </button>
                           ) : (
                             <span className="text-muted">Not provided</span>

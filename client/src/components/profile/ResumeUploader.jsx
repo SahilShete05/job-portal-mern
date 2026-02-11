@@ -120,37 +120,10 @@ const ResumeUploader = ({ currentResume, onUploadSuccess, onError }) => {
     return resumePath.split('/').pop();
   };
 
-  const getResumeUrl = (resumePath) => {
-    if (!resumePath) return null;
-    if (resumePath.startsWith('http')) {
-      return resumePath;
-    }
-    const apiBase = `${import.meta.env.VITE_API_BASE_URL}`;
-    const apiOrigin = apiBase.replace(/\/api\/?$/, '') || window.location.origin;
-    return `${apiOrigin}/${resumePath.replace(/^\//, '')}`;
-  };
-
-  const getViewerUrl = (resumePath) => {
-    const resumeUrl = getResumeUrl(resumePath);
-    if (!resumeUrl) return null;
-    const lowerPath = resumePath.toLowerCase();
-    if (lowerPath.endsWith('.pdf')) {
-      return resumeUrl;
-    }
-    return `https://docs.google.com/gview?embedded=1&url=${encodeURIComponent(resumeUrl)}`;
-  };
+  const isPdfResume = (resumePath) => resumePath?.toLowerCase().endsWith('.pdf');
 
   const handleViewResume = async () => {
     if (!currentResume) return;
-
-    const lowerPath = currentResume.toLowerCase();
-    if (!lowerPath.endsWith('.pdf')) {
-      const viewerUrl = getViewerUrl(currentResume);
-      if (viewerUrl) {
-        window.open(viewerUrl, '_blank', 'noopener,noreferrer');
-      }
-      return;
-    }
 
     try {
       if (!getToken()) {
@@ -174,10 +147,19 @@ const ResumeUploader = ({ currentResume, onUploadSuccess, onError }) => {
         }
       }
 
-      const contentType = response.headers['content-type'] || 'application/pdf';
+      const contentType = response.headers['content-type'] || 'application/octet-stream';
       const blob = new Blob([response.data], { type: contentType });
       const blobUrl = window.URL.createObjectURL(blob);
-      window.open(blobUrl, '_blank', 'noopener,noreferrer');
+      if (isPdfResume(currentResume)) {
+        window.open(blobUrl, '_blank', 'noopener,noreferrer');
+      } else {
+        const link = document.createElement('a');
+        link.href = blobUrl;
+        link.download = getFileName(currentResume) || 'resume';
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+      }
       setTimeout(() => window.URL.revokeObjectURL(blobUrl), 10000);
     } catch (err) {
       const errorMsg = err.response?.data?.message || 'Failed to open resume';
@@ -233,13 +215,13 @@ const ResumeUploader = ({ currentResume, onUploadSuccess, onError }) => {
             </div>
           </div>
           <div className="flex items-center gap-2">
-            {getViewerUrl(currentResume) && (
+            {currentResume && (
               <button
                 type="button"
                 onClick={handleViewResume}
                 className="px-3 py-2 rounded-lg text-sm font-medium text-[color:var(--app-accent)] border border-subtle hover:bg-[color:var(--app-accent-soft)] transition-colors"
               >
-                View
+                {isPdfResume(currentResume) ? 'View' : 'Download'}
               </button>
             )}
             <button
