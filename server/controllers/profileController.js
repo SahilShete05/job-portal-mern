@@ -501,13 +501,15 @@ exports.viewResume = async (req, res) => {
       });
     }
 
-    return streamRemoteFile(profile.resume, res);
+    await streamRemoteFile(profile.resume, res);
+    return;
   } catch (error) {
     console.error('View resume error:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Failed to view resume',
-      error: error.message,
-    });
+    if (!res.headersSent) {
+      res.status(error.status || 500).json({
+        success: false,
+        message: error.message || 'Failed to view resume',
+      });
+    }
   }
 };
