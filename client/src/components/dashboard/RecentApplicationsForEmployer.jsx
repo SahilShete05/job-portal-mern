@@ -6,13 +6,13 @@ const RecentApplicationsForEmployer = ({ applications = [], isLoading = false, e
   if (isLoading) {
     return (
       <div className="rounded-lg overflow-hidden bg-card border border-subtle shadow-card">
-        <table className="w-full">
+        <table className="w-full min-w-[640px]">
           <thead className="bg-[color:var(--app-surface)]">
             <tr>
-              <th className="px-6 py-3 text-left text-sm font-semibold">Applicant</th>
-              <th className="px-6 py-3 text-left text-sm font-semibold">Job Title</th>
-              <th className="px-6 py-3 text-left text-sm font-semibold">Status</th>
-              <th className="px-6 py-3 text-left text-sm font-semibold">Applied Date</th>
+              <th className="px-3 py-3 sm:px-6 text-left text-xs sm:text-sm font-semibold">Applicant</th>
+              <th className="px-3 py-3 sm:px-6 text-left text-xs sm:text-sm font-semibold">Job Title</th>
+              <th className="px-3 py-3 sm:px-6 text-left text-xs sm:text-sm font-semibold">Status</th>
+              <th className="px-3 py-3 sm:px-6 text-left text-xs sm:text-sm font-semibold">Applied Date</th>
             </tr>
           </thead>
           <tbody>
@@ -55,26 +55,26 @@ const RecentApplicationsForEmployer = ({ applications = [], isLoading = false, e
   return (
     <div className="rounded-lg overflow-hidden bg-card border border-subtle shadow-card">
       <div className="overflow-x-auto">
-        <table className="w-full">
+        <table className="w-full min-w-[640px]">
           <thead className="bg-[color:var(--app-surface)]">
             <tr className="border-b border-subtle">
               <th
-                className="px-6 py-4 text-left text-sm font-semibold text-primary"
+                className="px-3 py-3 sm:px-6 sm:py-4 text-left text-xs sm:text-sm font-semibold text-primary"
               >
                 Applicant
               </th>
               <th
-                className="px-6 py-4 text-left text-sm font-semibold text-primary"
+                className="px-3 py-3 sm:px-6 sm:py-4 text-left text-xs sm:text-sm font-semibold text-primary"
               >
                 Job Title
               </th>
               <th
-                className="px-6 py-4 text-left text-sm font-semibold text-primary"
+                className="px-3 py-3 sm:px-6 sm:py-4 text-left text-xs sm:text-sm font-semibold text-primary"
               >
                 Status
               </th>
               <th
-                className="px-6 py-4 text-left text-sm font-semibold text-primary"
+                className="px-3 py-3 sm:px-6 sm:py-4 text-left text-xs sm:text-sm font-semibold text-primary"
               >
                 Applied Date
               </th>
@@ -87,7 +87,7 @@ const RecentApplicationsForEmployer = ({ applications = [], isLoading = false, e
                 className="border-b border-subtle transition-colors duration-200 hover:bg-[color:var(--app-accent-soft)]"
               >
                 <td
-                  className="px-6 py-4 text-sm font-medium text-primary"
+                  className="px-3 py-3 sm:px-6 sm:py-4 text-xs sm:text-sm font-medium text-primary"
                 >
                   <div>
                     <p className="font-medium text-primary">
@@ -99,15 +99,15 @@ const RecentApplicationsForEmployer = ({ applications = [], isLoading = false, e
                   </div>
                 </td>
                 <td
-                  className="px-6 py-4 text-sm text-muted"
+                  className="px-3 py-3 sm:px-6 sm:py-4 text-xs sm:text-sm text-muted"
                 >
                   {app.jobTitle}
                 </td>
-                <td className="px-6 py-4">
+                <td className="px-3 py-3 sm:px-6 sm:py-4">
                   <StatusBadge status={app.status} />
                 </td>
                 <td
-                  className="px-6 py-4 text-sm text-muted"
+                  className="px-3 py-3 sm:px-6 sm:py-4 text-xs sm:text-sm text-muted"
                 >
                   {formatDate(app.appliedAt)}
                 </td>

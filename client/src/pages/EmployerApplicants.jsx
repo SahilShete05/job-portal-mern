@@ -182,15 +182,15 @@ const EmployerApplicants = () => {
             </div>
           ) : (
             <div className="overflow-x-auto">
-              <table className="w-full">
+              <table className="w-full min-w-[760px]">
                 <thead className="bg-[color:var(--app-surface)]">
                   <tr className="border-b border-subtle">
-                    <th className="px-6 py-4 text-left text-sm font-semibold text-primary">Applicant</th>
-                    <th className="px-6 py-4 text-left text-sm font-semibold text-primary">Email</th>
-                    <th className="px-6 py-4 text-left text-sm font-semibold text-primary">Resume</th>
-                    <th className="px-6 py-4 text-left text-sm font-semibold text-primary">Status</th>
-                    <th className="px-6 py-4 text-left text-sm font-semibold text-primary">Update</th>
-                    <th className="px-6 py-4 text-left text-sm font-semibold text-primary">Actions</th>
+                    <th className="px-3 py-3 sm:px-6 sm:py-4 text-left text-xs sm:text-sm font-semibold text-primary">Applicant</th>
+                    <th className="px-3 py-3 sm:px-6 sm:py-4 text-left text-xs sm:text-sm font-semibold text-primary">Email</th>
+                    <th className="px-3 py-3 sm:px-6 sm:py-4 text-left text-xs sm:text-sm font-semibold text-primary">Resume</th>
+                    <th className="px-3 py-3 sm:px-6 sm:py-4 text-left text-xs sm:text-sm font-semibold text-primary">Status</th>
+                    <th className="px-3 py-3 sm:px-6 sm:py-4 text-left text-xs sm:text-sm font-semibold text-primary">Update</th>
+                    <th className="px-3 py-3 sm:px-6 sm:py-4 text-left text-xs sm:text-sm font-semibold text-primary">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -211,13 +211,13 @@ const EmployerApplicants = () => {
                         key={application._id}
                         className="border-b border-subtle hover:bg-[color:var(--app-accent-soft)] transition-colors"
                       >
-                        <td className="px-6 py-4 text-sm font-medium text-primary">
+                        <td className="px-3 py-3 sm:px-6 sm:py-4 text-xs sm:text-sm font-medium text-primary">
                           {application.applicant?.name || 'Unknown'}
                         </td>
-                        <td className="px-6 py-4 text-sm text-muted">
+                        <td className="px-3 py-3 sm:px-6 sm:py-4 text-xs sm:text-sm text-muted">
                           {application.applicant?.email || '—'}
                         </td>
-                        <td className="px-6 py-4 text-sm">
+                        <td className="px-3 py-3 sm:px-6 sm:py-4 text-xs sm:text-sm">
                           {viewerUrl ? (
                             <button
                               type="button"
@@ -230,10 +230,10 @@ const EmployerApplicants = () => {
                             <span className="text-muted">Not provided</span>
                           )}
                         </td>
-                        <td className="px-6 py-4 text-sm">
+                        <td className="px-3 py-3 sm:px-6 sm:py-4 text-xs sm:text-sm">
                           <StatusBadge status={displayStatus} />
                         </td>
-                        <td className="px-6 py-4 text-sm">
+                        <td className="px-3 py-3 sm:px-6 sm:py-4 text-xs sm:text-sm">
                           <select
                             value={displayStatus || 'applied'}
                             onChange={(event) => handleStatusChange(application._id, event.target.value)}
@@ -250,7 +250,7 @@ const EmployerApplicants = () => {
                             <p className="mt-2 text-xs text-muted">Updating...</p>
                           )}
                         </td>
-                        <td className="px-6 py-4 text-sm">
+                        <td className="px-3 py-3 sm:px-6 sm:py-4 text-xs sm:text-sm">
                           <div className="flex flex-wrap gap-2">
                             <Button
                               variant="outline"

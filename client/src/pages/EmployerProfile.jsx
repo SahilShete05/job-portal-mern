@@ -144,11 +144,11 @@ const EmployerProfile = () => {
   }
 
   return (
-    <div className="min-h-screen bg-app py-12">
+    <div className="min-h-screen bg-app py-10 sm:py-12">
       <div className="max-w-3xl mx-auto px-4">
-        <div className="bg-card border border-subtle shadow-card rounded-2xl p-8">
+        <div className="bg-card border border-subtle shadow-card rounded-2xl p-6 sm:p-8">
           <div className="mb-8">
-            <h1 className="text-3xl font-bold text-primary">Employer Profile</h1>
+            <h1 className="text-2xl sm:text-3xl font-bold text-primary">Employer Profile</h1>
             <p className="mt-2 text-muted">
               Update your company details visible to candidates.
             </p>
@@ -313,10 +313,10 @@ const EmployerProfile = () => {
               />
             </div>
 
-            <div className="flex items-center gap-4">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-4">
               <button
                 type="submit"
-                className="inline-flex items-center justify-center rounded-lg bg-[color:var(--app-accent)] px-6 py-3 text-base font-semibold text-white shadow-soft transition hover:brightness-110 focus:outline-none focus:ring-2 ring-accent focus:ring-offset-2 focus:ring-offset-[color:var(--app-bg)] disabled:cursor-not-allowed disabled:opacity-60"
+                className="inline-flex items-center justify-center rounded-lg bg-[color:var(--app-accent)] px-6 py-3 text-base font-semibold text-white shadow-soft transition hover:brightness-110 focus:outline-none focus:ring-2 ring-accent focus:ring-offset-2 focus:ring-offset-[color:var(--app-bg)] disabled:cursor-not-allowed disabled:opacity-60 w-full sm:w-auto"
                 disabled={saving}
               >
                 {saving ? 'Saving...' : 'Save Changes'}
@@ -324,7 +324,7 @@ const EmployerProfile = () => {
               <button
                 type="button"
                 onClick={() => navigate(-1)}
-                className="text-sm font-medium text-muted hover:text-primary"
+                className="text-sm font-medium text-muted hover:text-primary w-full sm:w-auto"
               >
                 Cancel
               </button>

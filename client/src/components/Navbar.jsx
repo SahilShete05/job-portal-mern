@@ -135,7 +135,7 @@ const Navbar = () => {
           {/* Logo */}
           <Link
             to="/"
-            className="flex items-center gap-2 text-xl font-bold text-[color:var(--app-accent)] hover:brightness-110 transition-all duration-200"
+            className="flex items-center gap-2 text-lg sm:text-xl font-bold text-[color:var(--app-accent)] hover:brightness-110 transition-all duration-200"
           >
             <span className="w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm bg-[color:var(--app-accent)]">
               JP
@@ -144,7 +144,7 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden sm:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-6 lg:gap-8">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
@@ -157,7 +157,7 @@ const Navbar = () => {
           </div>
 
           {/* Right Section */}
-          <div className="flex items-center gap-3 sm:gap-4">
+          <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
             {/* Dark Mode Toggle */}
             <button
               onClick={toggleDarkMode}

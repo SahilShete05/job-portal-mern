@@ -5,13 +5,13 @@ const RecentJobsTable = ({ jobs = [], isLoading = false, error = null, onViewApp
   if (isLoading) {
     return (
       <div className="rounded-lg overflow-hidden bg-card border border-subtle shadow-card">
-        <table className="w-full">
+        <table className="w-full min-w-[640px]">
           <thead className="bg-[color:var(--app-surface)]">
             <tr>
-              <th className="px-6 py-3 text-left text-sm font-semibold">Job Title</th>
-              <th className="px-6 py-3 text-left text-sm font-semibold">Status</th>
-              <th className="px-6 py-3 text-left text-sm font-semibold">Posted Date</th>
-              <th className="px-6 py-3 text-left text-sm font-semibold">Applicants</th>
+              <th className="px-3 py-3 sm:px-6 text-left text-xs sm:text-sm font-semibold">Job Title</th>
+              <th className="px-3 py-3 sm:px-6 text-left text-xs sm:text-sm font-semibold">Status</th>
+              <th className="px-3 py-3 sm:px-6 text-left text-xs sm:text-sm font-semibold">Posted Date</th>
+              <th className="px-3 py-3 sm:px-6 text-left text-xs sm:text-sm font-semibold">Applicants</th>
             </tr>
           </thead>
           <tbody>
@@ -64,26 +64,26 @@ const RecentJobsTable = ({ jobs = [], isLoading = false, error = null, onViewApp
   return (
     <div className="rounded-lg overflow-hidden bg-card border border-subtle shadow-card">
       <div className="overflow-x-auto">
-        <table className="w-full">
+        <table className="w-full min-w-[640px]">
           <thead className="bg-[color:var(--app-surface)]">
             <tr className="border-b border-subtle">
               <th
-                className="px-6 py-4 text-left text-sm font-semibold text-primary"
+                className="px-3 py-3 sm:px-6 sm:py-4 text-left text-xs sm:text-sm font-semibold text-primary"
               >
                 Job Title
               </th>
               <th
-                className="px-6 py-4 text-left text-sm font-semibold text-primary"
+                className="px-3 py-3 sm:px-6 sm:py-4 text-left text-xs sm:text-sm font-semibold text-primary"
               >
                 Status
               </th>
               <th
-                className="px-6 py-4 text-left text-sm font-semibold text-primary"
+                className="px-3 py-3 sm:px-6 sm:py-4 text-left text-xs sm:text-sm font-semibold text-primary"
               >
                 Posted Date
               </th>
               <th
-                className="px-6 py-4 text-left text-sm font-semibold text-primary"
+                className="px-3 py-3 sm:px-6 sm:py-4 text-left text-xs sm:text-sm font-semibold text-primary"
               >
                 Applicants
               </th>
@@ -96,13 +96,13 @@ const RecentJobsTable = ({ jobs = [], isLoading = false, error = null, onViewApp
                 className="border-b border-subtle transition-colors duration-200 hover:bg-[color:var(--app-accent-soft)]"
               >
                 <td
-                  className="px-6 py-4 text-sm font-medium text-primary"
+                  className="px-3 py-3 sm:px-6 sm:py-4 text-xs sm:text-sm font-medium text-primary"
                 >
                   {job.title}
                 </td>
-                <td className="px-6 py-4">
+                <td className="px-3 py-3 sm:px-6 sm:py-4">
                   <span
-                    className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(
+                    className={`inline-flex items-center px-3 py-1 rounded-full text-xs sm:text-sm font-medium ${getStatusColor(
                       job.isActive
                     )}`}
                   >
@@ -110,11 +110,11 @@ const RecentJobsTable = ({ jobs = [], isLoading = false, error = null, onViewApp
                   </span>
                 </td>
                 <td
-                  className="px-6 py-4 text-sm text-muted"
+                  className="px-3 py-3 sm:px-6 sm:py-4 text-xs sm:text-sm text-muted"
                 >
                   {formatDate(job.createdAt)}
                 </td>
-                <td className="px-6 py-4">
+                <td className="px-3 py-3 sm:px-6 sm:py-4">
                   {onViewApplicants ? (
                     <button
                       type="button"

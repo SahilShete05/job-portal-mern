@@ -14,13 +14,13 @@ const EnhancedTable = ({
   if (isLoading && skeleton) {
     return (
       <div className="rounded-lg overflow-hidden bg-card border border-subtle shadow-card">
-        <table className="w-full">
+        <table className="w-full min-w-[640px]">
           <thead className="bg-[color:var(--app-surface)]">
             <tr>
               {columns.map((col) => (
                 <th
                   key={col.key}
-                  className="px-6 py-3 text-left text-sm font-semibold text-primary"
+                  className="px-3 py-3 sm:px-6 text-left text-xs sm:text-sm font-semibold text-primary"
                 >
                   {col.label}
                 </th>
@@ -49,13 +49,13 @@ const EnhancedTable = ({
   return (
     <div className="rounded-lg overflow-hidden bg-card shadow-card border border-subtle">
       <div className="overflow-x-auto">
-        <table className="w-full">
+        <table className="w-full min-w-[640px]">
           <thead className="bg-[color:var(--app-surface)]">
             <tr className="border-b border-subtle">
               {columns.map((col) => (
                 <th
                   key={col.key}
-                  className="px-6 py-4 text-left text-sm font-semibold text-primary"
+                  className="px-3 py-3 sm:px-6 sm:py-4 text-left text-xs sm:text-sm font-semibold text-primary"
                 >
                   {col.label}
                 </th>
@@ -77,7 +77,7 @@ const EnhancedTable = ({
                 {columns.map((col) => (
                   <td
                     key={`${row.id}-${col.key}`}
-                    className="px-6 py-4 text-sm text-primary"
+                    className="px-3 py-3 sm:px-6 sm:py-4 text-xs sm:text-sm text-primary break-words"
                   >
                     {col.render ? col.render(row[col.key], row) : row[col.key]}
                   </td>

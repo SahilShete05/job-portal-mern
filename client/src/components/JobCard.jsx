@@ -386,8 +386,8 @@ const JobCard = ({
         <div className="p-6 flex-grow">
           <div className="flex items-start justify-between gap-3">
             <div>
-              <h2 className="text-xl font-semibold text-primary line-clamp-2">
-                {job.title}
+              <h2 className="text-xl font-semibold text-primary leading-snug">
+                {job.title || 'Untitled role'}
               </h2>
               <p className="text-sm text-muted mt-1">
                 {job.companyName || 'Company'}

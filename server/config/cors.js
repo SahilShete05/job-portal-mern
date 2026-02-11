@@ -12,14 +12,16 @@ const getCorsOrigins = () => {
   }
 
   const devOrigins = process.env.CORS_ORIGIN_DEV || '';
-  if (!devOrigins) {
-    return [];
-  }
-
-  return devOrigins
+  const parsed = devOrigins
     .split(',')
     .map((origin) => origin.trim())
     .filter(Boolean);
+
+  if (parsed.length > 0) {
+    return parsed;
+  }
+
+  return ['http://localhost:3000', 'http://localhost:5173', 'http://localhost:5174'];
 };
 
 const isOriginAllowed = (origin) => {

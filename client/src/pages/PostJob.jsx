@@ -140,14 +140,14 @@ const PostJob = () => {
   );
 
   return (
-    <div className="min-h-screen bg-app py-12">
+    <div className="min-h-screen bg-app py-10 sm:py-12">
       <div className="max-w-3xl mx-auto px-4">
-        <div className="bg-card border border-subtle shadow-card rounded-2xl p-8">
+        <div className="bg-card border border-subtle shadow-card rounded-2xl p-6 sm:p-8">
           <div className="mb-8">
             <p className="text-sm uppercase tracking-wider text-[color:var(--app-accent)] font-semibold">
               Employer
             </p>
-            <h1 className="text-3xl font-bold text-primary">
+            <h1 className="text-2xl sm:text-3xl font-bold text-primary">
               {isEditing ? 'Edit Job' : 'Post a New Job'}
             </h1>
             <p className="mt-2 text-muted">
@@ -287,10 +287,10 @@ const PostJob = () => {
               </div>
             </div>
 
-            <div className="flex items-center gap-4">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-4">
               <button
                 type="submit"
-                className="inline-flex items-center justify-center rounded-lg bg-[color:var(--app-accent)] px-6 py-3 text-base font-semibold text-white shadow-soft transition hover:brightness-110 focus:outline-none focus:ring-2 ring-accent focus:ring-offset-2 focus:ring-offset-[color:var(--app-bg)] disabled:cursor-not-allowed disabled:opacity-60"
+                className="inline-flex items-center justify-center rounded-lg bg-[color:var(--app-accent)] px-6 py-3 text-base font-semibold text-white shadow-soft transition hover:brightness-110 focus:outline-none focus:ring-2 ring-accent focus:ring-offset-2 focus:ring-offset-[color:var(--app-bg)] disabled:cursor-not-allowed disabled:opacity-60 w-full sm:w-auto"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? (isEditing ? 'Saving...' : 'Posting...') : isEditing ? 'Save Changes' : 'Post Job'}
@@ -298,7 +298,7 @@ const PostJob = () => {
               <button
                 type="button"
                 onClick={() => navigate(-1)}
-                className="text-sm font-medium text-muted hover:text-primary"
+                className="text-sm font-medium text-muted hover:text-primary w-full sm:w-auto"
               >
                 Cancel
               </button>

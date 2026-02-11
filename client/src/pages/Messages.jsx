@@ -209,14 +209,14 @@ const Messages = () => {
         )}
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div className="bg-card border border-subtle rounded-2xl shadow-card p-4">
+          <div className="bg-card border border-subtle rounded-2xl shadow-card p-4 sm:p-5">
             <h2 className="text-lg font-semibold text-primary mb-3">Inbox</h2>
             {loadingConversations ? (
               <div className="py-12 text-center text-muted">Loading conversations...</div>
             ) : conversations.length === 0 ? (
               <div className="py-12 text-center text-muted">No conversations yet.</div>
             ) : (
-              <div className="space-y-2 max-h-[540px] overflow-y-auto">
+              <div className="space-y-2 max-h-[420px] sm:max-h-[540px] overflow-y-auto">
                 {conversations.map((conversation) => {
                   const other = getOtherParticipant(conversation);
                   const active = conversation._id === selectedConversationId;
@@ -265,7 +265,7 @@ const Messages = () => {
             )}
           </div>
 
-          <div className="lg:col-span-2 bg-card border border-subtle rounded-2xl shadow-card p-6 flex flex-col min-h-[520px]">
+          <div className="lg:col-span-2 bg-card border border-subtle rounded-2xl shadow-card p-4 sm:p-6 flex flex-col min-h-[420px] sm:min-h-[520px]">
             {!selectedConversationId && !starterReceiver ? (
               <div className="flex-1 flex flex-col items-center justify-center text-center text-muted">
                 <MessageSquare size={42} className="mb-4" />
@@ -299,7 +299,7 @@ const Messages = () => {
                           className={`flex ${isMine ? 'justify-end' : 'justify-start'}`}
                         >
                           <div
-                            className={`max-w-[70%] rounded-2xl px-4 py-3 text-sm shadow-soft ${
+                            className={`max-w-[85%] sm:max-w-[70%] rounded-2xl px-4 py-3 text-sm shadow-soft ${
                               isMine
                                 ? 'bg-[color:var(--app-accent)] text-white'
                                 : 'bg-surface text-primary border border-subtle'
@@ -321,7 +321,7 @@ const Messages = () => {
                   )}
                 </div>
 
-                <div className="pt-4 border-t border-subtle flex items-center gap-3">
+                <div className="pt-4 border-t border-subtle flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
                   <input
                     value={draft}
                     onChange={(event) => setDraft(event.target.value)}
@@ -333,6 +333,7 @@ const Messages = () => {
                     onClick={handleSend}
                     disabled={sending || !draft.trim()}
                     icon={Send}
+                    className="w-full sm:w-auto"
                   >
                     {sending ? 'Sending' : 'Send'}
                   </Button>

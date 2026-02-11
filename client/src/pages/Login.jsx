@@ -57,13 +57,13 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-app flex items-center justify-center px-4 py-12 transition-colors duration-300">
+    <div className="min-h-screen bg-app flex items-center justify-center px-4 py-10 sm:py-12 transition-colors duration-300">
       <div className="w-full max-w-md animate-fade-in">
         {/* Card */}
-        <div className="bg-card border border-subtle rounded-xl shadow-card p-8 transform transition-all duration-300 hover:shadow-lg">
+        <div className="bg-card border border-subtle rounded-xl shadow-card p-6 sm:p-8 transform transition-all duration-300 hover:shadow-lg">
           {/* Header */}
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-primary mb-2">Welcome Back</h1>
+            <h1 className="text-2xl sm:text-3xl font-bold text-primary mb-2">Welcome Back</h1>
             <p className="text-muted">Sign in to your account</p>
           </div>
 
