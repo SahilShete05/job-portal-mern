@@ -71,7 +71,7 @@ const clearRefreshTokenCookie = (res) => {
 // Register User
 exports.registerUser = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password, role } = req.body;
 
     // Validate all required fields exist
     if (!name || !email || !password) {
@@ -85,8 +85,11 @@ exports.registerUser = async (req, res) => {
     const sanitizedName = String(name).trim();
     const normalizedEmail = String(email).trim().toLowerCase();
     const sanitizedPassword = String(password);
-    // Force default non-admin role; admins must be provisioned server-side.
-    const sanitizedRole = 'jobseeker';
+    // Allow self-registration for jobseeker/employer only; admins must be provisioned server-side.
+    const allowedRoles = new Set(['jobseeker', 'employer']);
+    const sanitizedRole = allowedRoles.has(String(role || '').toLowerCase())
+      ? String(role).toLowerCase()
+      : 'jobseeker';
 
     // Validate name
     if (sanitizedName.length < 2 || sanitizedName.length > 50) {
