@@ -87,9 +87,17 @@ exports.registerUser = async (req, res) => {
     const sanitizedPassword = String(password);
     // Allow self-registration for jobseeker/employer only; admins must be provisioned server-side.
     const allowedRoles = new Set(['jobseeker', 'employer']);
-    const sanitizedRole = allowedRoles.has(String(role || '').toLowerCase())
-      ? String(role).toLowerCase()
-      : 'jobseeker';
+    let sanitizedRole = 'jobseeker';
+    if (role !== undefined) {
+      const normalizedRole = String(role).trim().toLowerCase();
+      if (!allowedRoles.has(normalizedRole)) {
+        return res.status(400).json({
+          success: false,
+          message: 'Invalid role. Only jobseeker or employer is allowed.',
+        });
+      }
+      sanitizedRole = normalizedRole;
+    }
 
     // Validate name
     if (sanitizedName.length < 2 || sanitizedName.length > 50) {

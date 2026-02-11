@@ -1,6 +1,29 @@
 import axios from 'axios';
 
-const API_BASE_URL = `${import.meta.env.VITE_API_BASE_URL}`;
+const resolveApiBaseUrl = () => {
+  const envBaseUrl = import.meta.env?.VITE_API_BASE_URL;
+  const normalizedEnv = typeof envBaseUrl === 'string' ? envBaseUrl.trim() : '';
+
+  if (normalizedEnv) {
+    if (normalizedEnv.startsWith('/')) {
+      return normalizedEnv.replace(/\/$/, '');
+    }
+
+    try {
+      return new URL(normalizedEnv).toString().replace(/\/$/, '');
+    } catch (error) {
+      console.warn('[auth] Invalid VITE_API_BASE_URL, using fallback.');
+    }
+  }
+
+  if (typeof window !== 'undefined') {
+    return `${window.location.origin}/api`;
+  }
+
+  return '/api';
+};
+
+const API_BASE_URL = resolveApiBaseUrl();
 
 let accessToken = null;
 
@@ -114,6 +137,7 @@ export const registerUser = async (data) => {
       name: data.name,
       email: data.email,
       password: data.password,
+      role: data.role,
     });
 
     if (response.data.success) {
