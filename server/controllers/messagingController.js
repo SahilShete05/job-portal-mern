@@ -21,20 +21,33 @@ exports.getConversations = async (req, res) => {
       })
       .sort({ updatedAt: -1 });
 
-    const enriched = await Promise.all(
-      conversations.map(async (conversation) => {
-        const unreadCount = await Message.countDocuments({
-          conversation: conversation._id,
-          receiver: req.user._id,
-          isRead: false,
-        });
+    const conversationIds = conversations.map((conversation) => conversation._id);
+    const unreadCounts = conversationIds.length
+      ? await Message.aggregate([
+          {
+            $match: {
+              conversation: { $in: conversationIds },
+              receiver: req.user._id,
+              isRead: false,
+            },
+          },
+          {
+            $group: {
+              _id: '$conversation',
+              count: { $sum: 1 },
+            },
+          },
+        ])
+      : [];
 
-        return {
-          ...conversation.toObject(),
-          unreadCount,
-        };
-      })
+    const unreadCountByConversation = new Map(
+      unreadCounts.map((entry) => [entry._id.toString(), entry.count])
     );
+
+    const enriched = conversations.map((conversation) => ({
+      ...conversation.toObject(),
+      unreadCount: unreadCountByConversation.get(conversation._id.toString()) || 0,
+    }));
 
     res.status(200).json({
       success: true,
