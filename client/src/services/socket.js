@@ -27,8 +27,21 @@ export const connectSocket = () => {
 
   currentToken = token;
 
-  const envBaseUrl = `${import.meta.env.VITE_API_BASE_URL}`;
-  const socketOrigin = envBaseUrl ? envBaseUrl.replace(/\/api\/?$/, '') : window.location.origin;
+  const envBaseUrl = import.meta.env?.VITE_API_BASE_URL;
+  const normalizedEnv = typeof envBaseUrl === 'string' ? envBaseUrl.trim() : '';
+  let socketOrigin = window.location.origin;
+
+  if (normalizedEnv) {
+    if (normalizedEnv.startsWith('/')) {
+      socketOrigin = `${window.location.origin}${normalizedEnv}`.replace(/\/api\/?$/, '');
+    } else {
+      try {
+        socketOrigin = new URL(normalizedEnv).toString().replace(/\/api\/?$/, '').replace(/\/$/, '');
+      } catch (error) {
+        console.warn('[socket] Invalid VITE_API_BASE_URL, using fallback.');
+      }
+    }
+  }
 
   socket = io(`${socketOrigin}`, {
     auth: { token },
