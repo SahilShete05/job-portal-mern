@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useId } from 'react';
 
 const TextAreaField = ({
   label,
+  id,
   placeholder,
   value,
   onChange,
@@ -10,14 +11,18 @@ const TextAreaField = ({
   rows = 4,
   helperText = null,
 }) => {
+  const autoId = useId();
+  const textAreaId = id || autoId;
+
   return (
     <div className="mb-4">
       {label && (
-        <label className="block text-sm font-medium mb-2 text-muted">
+        <label htmlFor={textAreaId} className="block text-sm font-medium mb-2 text-muted">
           {label}
         </label>
       )}
       <textarea
+        id={textAreaId}
         placeholder={placeholder}
         value={value}
         onChange={onChange}

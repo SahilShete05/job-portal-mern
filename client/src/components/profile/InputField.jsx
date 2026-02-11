@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useId } from 'react';
 
 const InputField = ({
   label,
+  id,
   type = 'text',
   placeholder,
   value,
@@ -10,14 +11,18 @@ const InputField = ({
   error = null,
   helperText = null,
 }) => {
+  const autoId = useId();
+  const inputId = id || autoId;
+
   return (
     <div className="mb-4">
       {label && (
-        <label className="block text-sm font-medium mb-2 text-muted">
+        <label htmlFor={inputId} className="block text-sm font-medium mb-2 text-muted">
           {label}
         </label>
       )}
       <input
+        id={inputId}
         type={type}
         placeholder={placeholder}
         value={value}

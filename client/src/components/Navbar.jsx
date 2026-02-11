@@ -163,6 +163,7 @@ const Navbar = () => {
               onClick={toggleDarkMode}
               className="p-2 rounded-lg transition-all duration-200 transform hover:scale-110 bg-card text-primary border border-subtle"
               title="Toggle dark mode"
+              aria-label="Toggle dark mode"
             >
               {isDark ? <Sun size={20} /> : <Moon size={20} />}
             </button>
@@ -173,6 +174,7 @@ const Navbar = () => {
                   onClick={() => setIsNotificationOpen(!isNotificationOpen)}
                   className="p-2 rounded-lg transition-all duration-200 bg-card text-primary border border-subtle relative"
                   title="Notifications"
+                  aria-label="Notifications"
                 >
                   <Bell size={20} />
                   {unreadCount > 0 && (

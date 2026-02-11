@@ -103,7 +103,7 @@ const StatusBadge = ({
   if (variant === 'pill') {
     return (
       <span className={`${baseStyles} whitespace-nowrap`}>
-        <span>{config.icon}</span>
+        <span aria-hidden="true">{config.icon}</span>
         <span>{config.label}</span>
       </span>
     );
@@ -111,7 +111,8 @@ const StatusBadge = ({
 
   return (
     <span className={`${baseStyles} whitespace-nowrap`}>
-      {config.icon}
+      <span aria-hidden="true">{config.icon}</span>
+      <span className="sr-only">{config.label}</span>
     </span>
   );
 };

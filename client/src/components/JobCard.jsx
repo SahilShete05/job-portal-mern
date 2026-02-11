@@ -57,6 +57,7 @@ const JobCard = ({
                 onClick={onToggleSave}
                 className="p-2 rounded-full border border-subtle bg-surface hover:bg-[color:var(--app-accent-soft)] transition-colors"
                 title={isSaved ? 'Remove from saved jobs' : 'Save this job'}
+                aria-label={isSaved ? 'Remove from saved jobs' : 'Save this job'}
               >
                 {isSaved ? <BookmarkCheck size={18} /> : <Bookmark size={18} />}
               </button>
