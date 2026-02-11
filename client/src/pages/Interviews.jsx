@@ -379,33 +379,37 @@ const Interviews = () => {
                     </Button>
                   </div>
                 </div>
-                <div className="grid grid-cols-7 gap-2 text-xs font-semibold text-muted mb-3">
-                  {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day) => (
-                    <div key={day} className="text-center">{day}</div>
-                  ))}
-                </div>
-                <div className="grid grid-cols-7 gap-2 text-sm">
-                  {leadingBlanks.map((_, index) => (
-                    <div key={`blank-${index}`} className="h-24 rounded-lg border border-transparent" />
-                  ))}
-                  {calendarDays.map((day) => {
-                    const date = new Date(calendarMonth.getFullYear(), calendarMonth.getMonth(), day);
-                    const dateKey = date.toDateString();
-                    const dayInterviews = interviewsByDate[dateKey] || [];
-                    return (
-                      <div key={day} className="h-24 rounded-lg border border-subtle bg-surface p-2 overflow-hidden">
-                        <div className="text-xs font-semibold text-primary mb-1">{day}</div>
-                        {dayInterviews.slice(0, 2).map((interview) => (
-                          <div key={interview._id} className="text-[10px] text-[color:var(--app-accent)] truncate">
-                            {interview.job?.title || 'Interview'}
+                <div className="overflow-x-auto -mx-2 px-2">
+                  <div className="min-w-[560px]">
+                    <div className="grid grid-cols-7 gap-2 text-xs font-semibold text-muted mb-3">
+                      {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day) => (
+                        <div key={day} className="text-center">{day}</div>
+                      ))}
+                    </div>
+                    <div className="grid grid-cols-7 gap-2 text-sm">
+                      {leadingBlanks.map((_, index) => (
+                        <div key={`blank-${index}`} className="h-24 rounded-lg border border-transparent" />
+                      ))}
+                      {calendarDays.map((day) => {
+                        const date = new Date(calendarMonth.getFullYear(), calendarMonth.getMonth(), day);
+                        const dateKey = date.toDateString();
+                        const dayInterviews = interviewsByDate[dateKey] || [];
+                        return (
+                          <div key={day} className="h-24 rounded-lg border border-subtle bg-surface p-2 overflow-hidden">
+                            <div className="text-xs font-semibold text-primary mb-1">{day}</div>
+                            {dayInterviews.slice(0, 2).map((interview) => (
+                              <div key={interview._id} className="text-[10px] text-[color:var(--app-accent)] truncate">
+                                {interview.job?.title || 'Interview'}
+                              </div>
+                            ))}
+                            {dayInterviews.length > 2 && (
+                              <div className="text-[10px] text-muted">+{dayInterviews.length - 2} more</div>
+                            )}
                           </div>
-                        ))}
-                        {dayInterviews.length > 2 && (
-                          <div className="text-[10px] text-muted">+{dayInterviews.length - 2} more</div>
-                        )}
-                      </div>
-                    );
-                  })}
+                        );
+                      })}
+                    </div>
+                  </div>
                 </div>
               </div>
             ) : (
