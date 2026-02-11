@@ -73,18 +73,18 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen bg-app flex items-center justify-center px-4 py-10 sm:py-12 transition-colors duration-300">
+    <div className="min-h-[calc(100vh-4rem)] bg-app flex items-start sm:items-center justify-center px-4 py-6 sm:py-10 transition-colors duration-300">
       <div className="w-full max-w-md animate-fade-in">
         {/* Card */}
         <div className="bg-card border border-subtle rounded-xl shadow-card p-6 sm:p-8 transform transition-all duration-300 hover:shadow-lg">
           {/* Header */}
-          <div className="text-center mb-8">
+          <div className="text-center mb-6 sm:mb-8">
             <h1 className="text-2xl sm:text-3xl font-bold text-primary mb-2">Join Us</h1>
             <p className="text-muted">Create your account to get started</p>
           </div>
 
           {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
             {/* Name Field */}
             <div>
               <label className="block text-sm font-semibold text-muted mb-2">
@@ -217,7 +217,7 @@ const Register = () => {
         </div>
 
         {/* Footer Text */}
-        <p className="text-center text-muted text-sm mt-6">
+        <p className="text-center text-muted text-sm mt-4 sm:mt-6">
           Job Portal © 2026
         </p>
       </div>
