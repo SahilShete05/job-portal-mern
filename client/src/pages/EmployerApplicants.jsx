@@ -83,13 +83,7 @@ const EmployerApplicants = () => {
       return;
     }
 
-    const lowerPath = resumePath.toLowerCase();
-
     try {
-      if (!getToken()) {
-        await refreshSession();
-      }
-
       const makeRequest = () => api.get(`/applications/${applicationId}/resume`, {
         responseType: 'blob',
         headers: getToken() ? { Authorization: `Bearer ${getToken()}` } : undefined,
@@ -108,9 +102,10 @@ const EmployerApplicants = () => {
       }
 
       const contentType = response.headers['content-type'] || 'application/octet-stream';
+      const isPdf = contentType.includes('pdf') || resumePath.toLowerCase().endsWith('.pdf');
       const blob = new Blob([response.data], { type: contentType });
       const blobUrl = window.URL.createObjectURL(blob);
-      if (lowerPath.endsWith('.pdf')) {
+      if (isPdf) {
         window.open(blobUrl, '_blank', 'noopener,noreferrer');
       } else {
         const fileName = resumePath.split('/').pop() || 'resume';
