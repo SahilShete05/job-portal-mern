@@ -122,15 +122,17 @@ exports.getJobs = async (req, res) => {
   try {
     const { title, location, jobType, page = 1, limit = 10 } = req.query;
 
+    const escapeRegex = (value) => String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
     // Build filter object
     const filter = { isActive: true };
 
     if (title) {
-      filter.title = { $regex: title, $options: 'i' };
+      filter.title = { $regex: escapeRegex(title), $options: 'i' };
     }
 
     if (location) {
-      filter.location = { $regex: location, $options: 'i' };
+      filter.location = { $regex: escapeRegex(location), $options: 'i' };
     }
 
     if (jobType) {
